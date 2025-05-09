@@ -5,6 +5,13 @@
 当前使用的ip库为：https://github.com/lionsoul2014/ip2region。
 
 # 使用
+## 编译
+```bash
+$ git clone https://github.com/mcp-io/mcp-ip.git
+$ cd mcp-ip
+$ go build -o mcp-ip
+```
+
 ## stdio
 ```json
 {
@@ -22,5 +29,4 @@
 }
 ```
 
-## streamable http
 
