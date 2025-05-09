@@ -7,7 +7,7 @@
 # 使用
 ## 编译
 ```bash
-$ git clone https://github.com/mcp-io/mcp-ip.git
+$ git clone https://github.com/qiangmzsx/mcp-ip.git
 $ cd mcp-ip
 $ go build -o mcp-ip
 ```
