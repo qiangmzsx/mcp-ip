@@ -18,7 +18,6 @@ import (
 
 func main() {
 	var err error
-	err = registerIPService()
 	if err != nil {
 		log.Fatalf("Failed to register IP service: %v", err)
 		return
@@ -60,21 +59,21 @@ func main() {
 	}
 }
 
-func registerIPService() error {
-	var xdbPath string
-	flag.StringVar(&xdbPath, "xdb_path", "./data/ip2region.xdb", "ip2region xdb path")
-	// flag.Parse()
+func registerIPService(xdbPath string) error {
 
 	_, err := ip.NewIP2RegionService(xdbPath)
+	if err != nil {
+		log.Fatalf("Failed to create IP2Region service: %v", err)
+	}
 	return err
 }
 
 func getTransport() (t transport.ServerTransport) {
-	var mode, port, stateMode string
+	var mode, port, stateMode, xdbPath string
 	flag.StringVar(&mode, "transport", "streamable_http", "The transport to use, should be \"stdio\" or \"sse\" or \"streamable_http\"")
 	flag.StringVar(&port, "port", "8080", "sse server address")
 	flag.StringVar(&stateMode, "state_mode", "stateful", "streamable_http server state mode, should be \"stateless\" or \"stateful\"")
-
+	flag.StringVar(&xdbPath, "xdb_path", "./data/ip2region.xdb", "ip2region xdb path")
 	flag.Parse()
 
 	switch mode {
@@ -92,7 +91,7 @@ func getTransport() (t transport.ServerTransport) {
 	default:
 		panic(fmt.Errorf("unknown mode: %s", mode))
 	}
-
+	registerIPService(xdbPath)
 	return t
 }
 
