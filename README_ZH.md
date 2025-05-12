@@ -28,14 +28,16 @@ $ go build -o mcp-ip
         "-transport",
         "stdio",
         "-xdb_path",
-        "./data/ip2region.xdb"
+        "/data/ip2region.xdb"
       ]
     }
   }
 }
 ```
+其中`-xdb_path`尽量指定绝对路径。
 ## streamable_http
 ```bash
-http://127.0.0.1:8080/mcp
+$ ./mcp-ip -transport streamable_http -port 8080 -xdb_path /data/ip2region.xdb
+$ http://127.0.0.1:8080/mcp
 ```
 
