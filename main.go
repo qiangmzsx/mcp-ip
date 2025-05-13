@@ -17,11 +17,6 @@ import (
 )
 
 func main() {
-	var err error
-	if err != nil {
-		log.Fatalf("Failed to register IP service: %v", err)
-		return
-	}
 	srv, err := server.NewServer(
 		getTransport(),
 		server.WithServerInfo(protocol.Implementation{
@@ -32,11 +27,13 @@ func main() {
 
 	if err != nil {
 		log.Fatalf("Failed to create server: %v", err)
+		return
 	}
 
 	ip2regionTool, err := protocol.NewTool("ip2region", "Supports IPv4/IPv6 address retrieval for country, province, city, and IP information.", ip.IPReq{})
 	if err != nil {
-		log.Fatalf("Failed to create tool: %v", err)
+		log.Fatalf("Failed to create tool %s: %v", "ip2region", err)
+		return
 	}
 
 	srv.RegisterTool(ip2regionTool, ip.GetIP2Region)
