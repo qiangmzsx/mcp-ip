@@ -23,6 +23,7 @@ func main() {
 			Name:    "ip-server",
 			Version: "1.0.0",
 		}),
+		server.WithSessionMaxIdleTime(5*time.Minute),
 	)
 
 	if err != nil {
